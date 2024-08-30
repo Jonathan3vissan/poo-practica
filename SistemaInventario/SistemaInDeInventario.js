@@ -13,9 +13,12 @@ class SitemaInventario {
         }
     }
 
-
-
     venderProducto(nombreVEnta, cantidadVenta) {
+
+        if (this.#productos) {
+    
+}
+
 
 
 
