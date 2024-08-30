@@ -1,8 +1,11 @@
 class Empleado {
     #salario = 1000;
     aumentoSalario(monto) {
-        this.#salario += monto
-
+        if (monto > 0) {
+            this.#salario += monto
+        } else {
+            console.log("no puede ser un monto negativo");
+        }
 
     }
     consultaSAlario() {

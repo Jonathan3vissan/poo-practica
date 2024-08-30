@@ -1,7 +1,11 @@
 class CuentaBancaria {
     #saldo = 1200;
     depositar(monto) {
-        this.#saldo += monto;
+        if (monto>0) {
+            this.#saldo += monto;
+        }else{
+            console.log("cantindad invalida");
+        }
     }
     retirar(monto) {
         if (monto > 0 && monto <= this.#saldo) {
