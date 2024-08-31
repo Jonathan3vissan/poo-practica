@@ -52,6 +52,11 @@ class Agenda {
         }
     }
 
+    buscarContacto(nombre) {
+        const contactoEncontrado = this.#contacto.find(contacto => contacto.nombre === nombre);
+        return contactoEncontrado
+    }
+
 
     listaDeContactos() {
         return this.#contacto
@@ -59,6 +64,7 @@ class Agenda {
 
 
 }
+
 const agendacontactos = new Agenda();
 let nombre = "estaban ";
 let numeroTelefno = 1154891235;
@@ -67,6 +73,7 @@ agendacontactos.agregarContacto(nombre, numeroTelefno)
 
 
 console.table(agendacontactos.listaDeContactos())
+console.table(agendacontactos.buscarContacto(nombre))
 
 agendacontactos.eliminarContacto(nombre)
 
