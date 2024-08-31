@@ -21,34 +21,39 @@ class SitemaInventario {
         }
         if (productoEncontrado) {
             this.#productos[p].cantidad += agregarCantidad;
-            console.log("producto existente, se aumenteo el stock");
+            console.log("producto existente,cantidad en deposito agregada");
         } else {
             this.#productos.push(productoNuevo)
-            console.log("Producto nuevo , agrega al alamcen");
+            console.log("Producto nuevo, agregado al sistema");
         }
     }
 
-
-
-
-
-
     venderProducto(nombreVenta, cantidadVenta) {
+        let productoEncontrado = false;
+        let p = 0;
+        for (let i = 0; i < this.#productos.length; i++) {
+            if (this.#productos[i].nombre === nombreVenta) {
+                productoEncontrado = true;
+                p = i;
+            }
+        }
+        if (productoEncontrado) {
+            if (this.#productos[p].cantidad >= cantidadVenta) {
+                this.#productos[p].cantidad -= cantidadVenta;
+                console.log("venta exitosa ");
+            } else {
+                console.log("no se puede realiza la venta por falta de unidades, intente con una cantidad menor a:", cantidadVenta);
 
-        const productoParaVender = this.#productos.find(productos => this.#productos.nombre === nombreVenta)
-
-        console.log("econtre el producto",productoParaVender);
-        
+            }
+        } else {
+            console.log("prodcuto no encotrado, revise el nombre del producto por facor ");
+        }
     }
-
-
-
 
     consultaInventario() {
-        return console.table(this.#productos);
+
+        return this.#productos
     }
-
-
 }
 
 
@@ -61,8 +66,14 @@ let DonSatur = {
     nombre: "Don Satur",
     cantindad: 250,
 }
+let nombreVentass = "Don Satur";
+let venderCantidad = 199;
 
 
 almacenDonPedro.agregarProductos(DonSatur.nombre, DonSatur.cantindad)
 
-console.log(almacenDonPedro.consultaInventario());
+console.table(almacenDonPedro.consultaInventario());
+
+almacenDonPedro.venderProducto(nombreVentass, venderCantidad)
+
+console.table(almacenDonPedro.consultaInventario())
