@@ -27,13 +27,30 @@ class Agenda {
             if (this.#contacto[0].nombre === "def nombre") {
                 this.#contacto.shift();
                 console.log("elimino el def de fabrica");
-                
+
             }
             this.#contacto.push(nuevoContacto)
             console.log("contacto agredo exitosamente");
         }
     }
 
+
+    eliminarContacto(nombre) {
+        let contactoEncontrado = false;
+        let p = 0;
+        for (let i = 0; i < this.#contacto.length; i++) {
+            if (this.#contacto[i].nombre === nombre) {
+                contactoEncontrado = true;
+                p = i;
+            }
+        }
+        if (contactoEncontrado) {
+            this.#contacto.splice(p, 1);
+            console.log("contacto eliminado exitosamente");
+        } else {
+            console.log("contacto no encontrado , no se puede llevar a cabo la accion desead");
+        }
+    }
 
 
     listaDeContactos() {
@@ -48,5 +65,9 @@ let numeroTelefno = 1154891235;
 
 agendacontactos.agregarContacto(nombre, numeroTelefno)
 
+
+console.table(agendacontactos.listaDeContactos())
+
+agendacontactos.eliminarContacto(nombre)
 
 console.table(agendacontactos.listaDeContactos())
