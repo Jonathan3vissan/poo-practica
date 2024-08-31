@@ -6,39 +6,25 @@ class SitemaInventario {
         }
     ];
 
-
     agregarProductos(nuevoNombre, agregarCantidad) {
-      let productoEncontrado=false;
-        producto1 = {
+        let productoEncontrado = false;
+        let p = 0;
+        let productoNuevo = {
             nombre: nuevoNombre,
             cantidad: agregarCantidad
         }
-        console.log(producto1);
-        console.log("obehot leido bien");
-        console.log(this.#productos.length);
-        console.log(this.#productos);
-        console.log(typeof this.#productos);
-        try {
-
-            if (this.#productos.length === 0) {
-                this.#productos.push(producto1)
-            } else {
-                for (let i = 0; i <= this.#productos.length; i++) {
-
-                    if (this.#productos[i].nombre === nuevoNombre) {
-                        this.#productos[i].cantidad += agregarCantidad;
-                        console.log("aca arriba agrego stock-----29");
-
-                    } else {
-                        this.#productos.push(producto1)
-                        console.log("arriba agrego el nuevo producto-------------33");
-                        console.log(this.#productos[i]);
-
-                    }
-                }
+        for (let i = 0; i < this.#productos.length; i++) {
+            if (this.#productos[i].nombre.includes === productoNuevo.nombre) {
+                productoEncontrado = true;
+                p = i;
             }
-        } catch (error) {
-            console.error(error)
+        }
+        if (productoEncontrado) {
+            this.#productos[p].cantidad += agregarCantidad;
+            console.log("producto existente, se aumenteo el stock");
+        } else {
+            this.#productos.push(productoNuevo)
+            console.log("Producto nuevo , agrega al alamcen");
         }
     }
 
@@ -48,54 +34,35 @@ class SitemaInventario {
 
 
     venderProducto(nombreVenta, cantidadVenta) {
-        for (let i = 0; i < this.#productos.length; i++) {
-            if (this.#productos[i].nombre === nombreVenta) {
-                if (this.#productos[i].cantidad >= cantidadVenta) {
-                    this.#productos[i].cantidad -= cantidadVenta;
-                } else {
-                    console.log("cantidad insuficiente ,pruebe conuna cantidad mas pequeña");
-                }
-            } else {
-                console.log("Producto no disponible   ---57");
 
-            }
-        }
+        const productoParaVender = this.#productos.find(productos => this.#productos.nombre === nombreVenta)
 
+        console.log("econtre el producto",productoParaVender);
+        
     }
+
 
 
 
     consultaInventario() {
-        try {
-            for (let i = 0; i < this.#productos.length; i++) {
-                console.log(this.#productos.length);
-                console.log(`nombre porducto:${this.#productos[i].nombre} cantidad en stock: ${this.#productos[i].cantidad}`);
-                console.log("debajo del mostra procudtoc");
-
-            }
-
-        } catch (error) {
-            console.error(error)
-        }
+        return console.table(this.#productos);
     }
+
 
 }
 
+
+
+
+
+
 const almacenDonPedro = new SitemaInventario();
-let producto1 = "Don Satur"
-let cantidaAgregada = 250;
-let vendidos = 12;
+let DonSatur = {
+    nombre: "Don Satur",
+    cantindad: 250,
+}
 
-almacenDonPedro.agregarProductos(producto1, cantidaAgregada)
 
-console.log("abajo tiene que esta le primero valor de inventario");
+almacenDonPedro.agregarProductos(DonSatur.nombre, DonSatur.cantindad)
 
 console.log(almacenDonPedro.consultaInventario());
-
-
-almacenDonPedro.venderProducto(producto1, vendidos)
-
-
-console.log("-----------92 despues de la venta ---------");
-console.log(almacenDonPedro.consultaInventario());
-
